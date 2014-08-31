@@ -36,6 +36,6 @@ Dir.chdir APP_ROOT do
     system "pumactl -P tmp/pids/puma.pid restart"
   else
     puts "VAL Project successfully installed. To start the server, run:"
-    puts "    foreman start"
+    puts "        foreman start"
   end
 end
