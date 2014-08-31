@@ -1,4 +1,4 @@
-$:.unshift File.dirname(__FILE__)
+$:.unshift File.expand_path("../../", __FILE__)
 env = (ENV['RACK_ENV'] || :development)
 
 require 'bundler'
@@ -16,9 +16,10 @@ Application.configure do |config|
 end
 
 
-db_config = YAML.load(ERB.new(File.read("config/database.yml")).result)[Application.config.env]
+db_configs = YAML.load(ERB.new(File.read("config/database.yml")).result)
 ActiveRecord::Base.default_timezone = :utc
-ActiveRecord::Base.establish_connection(db_config)
+ActiveRecord::Tasks::DatabaseTasks.database_configuration = db_configs
+ActiveRecord::Base.establish_connection(db_configs[Application.config.env])
 
 specific_environment = "config/environments/#{Application.config.env}.rb"
 require specific_environment if File.exists? specific_environment

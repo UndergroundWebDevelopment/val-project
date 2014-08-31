@@ -1,5 +1,5 @@
 #!/usr/bin/env rake
-require File.expand_path('../environment', __FILE__)
+require File.expand_path('../config/environment', __FILE__)
 
 task :rails_env do
 end
@@ -11,7 +11,7 @@ module Rails
   def self.application
     Struct.new(:config, :paths) do
       def load_seed
-        require File.expand_path('../application', __FILE__)
+        require File.expand_path('../config/application', __FILE__)
         require File.expand_path('../db/seeds', __FILE__)
       end
     end.new(config, paths)
@@ -20,11 +20,14 @@ module Rails
   def self.config
     require 'erb'
     db_config = YAML.load(ERB.new(File.read("config/database.yml")).result)
-    Struct.new(:database_configuration).new(db_config)
+    Struct.new(:database_configuration, :paths).new(db_config, paths)
   end
 
   def self.paths
-    { 'db/migrate' => ["#{root}/db/migrate"] }
+    { 
+      'db/migrate' => ["#{root}/db/migrate"],
+      'db' => ["#{root}/db"]
+    }
   end
 
   def self.env

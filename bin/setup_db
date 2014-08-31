@@ -7,14 +7,14 @@ APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
 POSTGRES_DB_PATH = "db/postgresql"
 
 def rake_setup_db
-  unless system "rake db:setup"
-    system "rake db:create"
-    system "rake db:migrate"
+  unless system "foreman run bin/rake db:setup"
+    system "foreman run bin/rake db:create"
+    system "foreman run bin/rake db:migrate"
   end
 end
 
 Dir.chdir APP_ROOT do
-  unless File.exist?(POSTGRES_DB_PATH)
+  unless File.exist?(POSTGRES_DB_PATH) && Dir.entries(POSTGRES_DB_PATH).join != "..."
     puts "\n== Instantinating postgress DB into #{POSTGRES_DB_PATH} =="
     system "mkdir -p #{POSTGRES_DB_PATH}"
     system "initdb -D #{POSTGRES_DB_PATH}"
