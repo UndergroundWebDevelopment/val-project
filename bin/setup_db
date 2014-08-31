@@ -1,0 +1,33 @@
+#!/usr/bin/env ruby
+require 'childprocess'
+require 'pathname'
+
+APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
+
+def rake_setup_db
+  unless system "bin/rake db:setup"
+    system "bin/rake db:create"
+    system "bin/rake db:migrate"
+  end
+end
+
+Dir.chdir APP_ROOT do
+  unless File.exist?("vendor/postgresql")
+    puts "\n== Instantinating postgress DB into vendor/postgresql =="
+    system "mkdir -p vendor/postgresql"
+    system "initdb -D vendor/postgresql"
+  end
+
+  if File.exist?("tmp/pids/postgres.pid")
+    rake_setup_db
+  else
+    postgres_proc = ChildProcess.build("postgres", "-D", "vendor/postgresql")
+    postgres_proc.io.inherit!
+    postgres_proc.start
+    sleep(1)
+    if postgres_proc.alive?
+      rake_setup_db
+    end
+    postgres_proc.stop
+  end
+end
