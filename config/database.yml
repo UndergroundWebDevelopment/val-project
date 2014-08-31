@@ -1,0 +1,19 @@
+default: &default
+  adapter: postgis
+  encoding: utf8
+  postgis_extension: postgis
+  schema_search_path: '"$user", public'
+  pool: 5
+  database: <%= ENV['DB_NAME'] || "application_#{ENV['RACK_ENV']}" %>
+  username: <%= ENV['DB_USERNAME'] %>
+  password: <%= ENV['DB_PASSWORD'] %>
+  host: <%= ENV['DB_HOSTNAME'] %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

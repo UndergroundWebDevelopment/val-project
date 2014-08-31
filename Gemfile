@@ -1,0 +1,25 @@
+source 'https://rubygems.org'
+
+gem 'rack'
+gem 'grape'
+gem 'activerecord', require: 'active_record'
+gem 'pg'
+gem 'rgeo'
+gem 'activerecord-postgis-adapter'
+gem 'rake'
+gem 'roar'
+gem 'rack-ssl-enforcer'
+gem 'racksh'
+gem 'fdoc'
+gem 'puma'
+
+group :test do
+  gem 'rspec'
+  gem 'rack-test', require: 'rack/test'
+  gem 'guard'
+  gem 'guard-rspec'
+  gem 'rb-fsevent'
+  gem 'rb-inotify'
+  gem 'database_cleaner'
+  gem 'factory_girl'
+end

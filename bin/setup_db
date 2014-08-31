@@ -1,0 +1,35 @@
+#!/usr/bin/env ruby
+require 'childprocess'
+require 'pathname'
+
+APP_ROOT = Pathname.new File.expand_path('../../',  __FILE__)
+
+POSTGRES_DB_PATH = "db/postgresql"
+
+def rake_setup_db
+  unless system "rake db:setup"
+    system "rake db:create"
+    system "rake db:migrate"
+  end
+end
+
+Dir.chdir APP_ROOT do
+  unless File.exist?(POSTGRES_DB_PATH)
+    puts "\n== Instantinating postgress DB into #{POSTGRES_DB_PATH} =="
+    system "mkdir -p #{POSTGRES_DB_PATH}"
+    system "initdb -D #{POSTGRES_DB_PATH}"
+  end
+
+  if `ps aux | grep "postgres -D #{POSTGRES_DB_PATH}"`.split(/\r\n/).size > 1
+    rake_setup_db
+  else
+    postgres_proc = ChildProcess.build("postgres", "-D", POSTGRES_DB_PATH)
+    postgres_proc.io.inherit!
+    postgres_proc.start
+    sleep(1)
+    if postgres_proc.alive?
+      rake_setup_db
+    end
+    postgres_proc.stop
+  end
+end
