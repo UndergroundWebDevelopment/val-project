@@ -1,0 +1,2 @@
+db: bin/local_postgres
+web: bin/rails server
