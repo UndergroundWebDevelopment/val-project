@@ -1,6 +1,11 @@
-require "application_responder"
+require 'application_responder'
+require 'trailblazer/operation/controller/active_record'
 
 class ApplicationController < ActionController::Base
+  # Cause trailblazer to create named instance variables, e.g. @song
+  include Trailblazer::Operation::Controller
+  include Trailblazer::Operation::Controller::ActiveRecord
+
   self.responder = ApplicationResponder
   respond_to :html
 
