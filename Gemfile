@@ -41,6 +41,10 @@ gem "roar-rails"
 # Cells comes from the same guy who makes Trailblazer, and provides better ways
 # of data mapping to views. See https://github.com/apotonick/cells
 gem "cells"
+# Haml support for cells, and dependent pre-released haml
+gem 'cells-haml'
+gem "haml", github: "haml/haml", ref: "7c7c169"
+
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
 # Turbolinks makes following links in your web application faster. Read more: https://github.com/rails/turbolinks
