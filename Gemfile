@@ -82,6 +82,11 @@ group :development, :test do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
+
+  # Rspec for tests
+  gem 'rspec-rails', '~> 3.0'
+  # Capybara for acceptance / integration testing of the UI
+  gem 'capybara'
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.
