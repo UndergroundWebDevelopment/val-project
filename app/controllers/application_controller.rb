@@ -7,7 +7,7 @@ class ApplicationController < ActionController::Base
   include Trailblazer::Operation::Controller::ActiveRecord
 
   self.responder = ApplicationResponder
-  respond_to :html
+  respond_to :html, :json
 
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.

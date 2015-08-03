@@ -1,4 +1,6 @@
 class ChannelsController < ApplicationController
+  operation document_formats: :json
+
   def new
     form Channel::Create
   end
@@ -9,23 +11,18 @@ class ChannelsController < ApplicationController
 
   def show
     present Channel::Update
+    respond_with @model
   end
 
   def create
-    respond Channel::Create do |op|
-      return respond_with op.contract
-    end
+    respond Channel::Create
   end
 
   def update
-    respond Channel::Update do |op|
-      return respond_with op.contract
-    end
+    respond Channel::Update
   end
 
   def destroy
-    respond Channel::Destroy do |op|
-      return respond_with op.contract
-    end
+    respond Channel::Destroy
   end
 end

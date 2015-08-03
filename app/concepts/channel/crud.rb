@@ -1,13 +1,28 @@
+require "trailblazer/operation/representer"
+
 class Channel < ActiveRecord::Base
   class Create < Trailblazer::Operation
     include CRUD
+    include Responder
     model ::Channel, :create
+
+    builds do |params|
+      JSON if params[:format] == "json"
+    end
 
     contract do
       property :name
       property :description
 
       validates :name, presence: true
+    end
+
+    class JSON < self
+      include Representer
+
+      representer do
+        include Roar::JSON
+      end
     end
 
     def process(params)
