@@ -6,6 +6,8 @@ class EventLog < ActiveRecord::Base
   # event_log against candidate operations, and then marking the event_log
   # record as processed when this has been done.
   class Process < Trailblazer::Operation
+    include Pundit
+    include CRUD
     include Responder
     model ::EventLog, :update
 
@@ -50,6 +52,11 @@ class EventLog < ActiveRecord::Base
       # Update the model (event) with the time it was successfully
       # processed at.
       model.update(successfully_processed_at: Time.now)
+    end
+
+    # NOTE: Temporary shim for pundit till we figure out sessions:
+    def pundit_user
+      nil
     end
   end
 end

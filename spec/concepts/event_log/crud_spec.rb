@@ -20,6 +20,16 @@ RSpec.describe EventLog::Create do
     expect(event_log.payload).to eq({"foo" => "bar"})
   end
 
+  it "queues event to be processed later" do
+    expect(ProcessEventsJob).to receive(:perform_later)
+
+    EventLog::Create[event_log: {
+      channel: channel,
+      type: "github_issue_created",
+      payload: {"foo" => "bar"},
+    }].model
+  end
+
   it "invalid" do
     res, op = EventLog::Create.run(event_log: {type: ""})
 
