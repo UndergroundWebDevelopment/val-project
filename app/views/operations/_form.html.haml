@@ -1,0 +1,20 @@
+= simple_form_for @form do |f|
+  = f.input :name
+  = f.input :description
+
+  = f.fields_for :conditions do |c|
+    = c.input :operator_field_name
+    = c.input :operator
+    = c.input :operand_field_name
+    = c.input :operand_value
+    = c.input :data_type
+
+  = f.fields_for :actions do |a|
+    = a.input :name
+    = a.input :description
+    = a.input :type
+    = a.fields_for :field_mappings do |fm|
+      = fm.input :source_field_name
+      = fm.input :external_api_field_name
+
+  = f.submit

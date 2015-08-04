@@ -17,7 +17,7 @@ RSpec.describe Channel::Create do
 
     expect(res).to eq false
     expect(op.model).to_not be_persisted
-    expect(op.errors.details[:name]).to eq([{error: "can't be blank"}])
+    expect(op.contract.errors.details[:name]).to eq([{error: "can't be blank"}])
   end
 end
 

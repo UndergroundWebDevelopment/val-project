@@ -1,6 +1,6 @@
-class CreateChannels < ActiveRecord::Migration
+class CreateOperations < ActiveRecord::Migration
   def change
-    create_table :channels do |t|
+    create_table :operations do |t|
       t.string :name, null: false
       t.text :description
 

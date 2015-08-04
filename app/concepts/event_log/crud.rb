@@ -1,20 +1,20 @@
 require "trailblazer/operation/representer"
 
-class Channel < ActiveRecord::Base
+class EventLog < ActiveRecord::Base
   class Create < Trailblazer::Operation
     include CRUD
     include Responder
-    model ::Channel, :create
+    model ::EventLog, :create
 
     builds do |params|
       JSON if params[:format] == "json"
     end
 
     contract do
-      property :name
-      property :description
+      property :type
+      property :payload, type: Hash
 
-      validates :name, presence: true
+      validates :type, presence: true
     end
 
     class JSON < self
@@ -26,7 +26,7 @@ class Channel < ActiveRecord::Base
     end
 
     def process(params)
-      validate(params[:channel]) do |form|
+      validate(params[:event_log]) do |form|
         form.save
       end
     end
@@ -34,11 +34,10 @@ class Channel < ActiveRecord::Base
 
   class Update < Create
     action :update
-  end
 
-  class Destroy < Update
-    def process(params)
-      model.destroy!
+    contract do
+      property :type, writeable: false
+      property :payload, type: Hash, writeable: false
     end
   end
 end

@@ -1,6 +1,4 @@
 class ChannelsController < ApplicationController
-  operation document_formats: :json
-
   def new
     form Channel::Create
   end

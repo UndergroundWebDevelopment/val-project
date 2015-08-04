@@ -6,6 +6,8 @@ class ApplicationController < ActionController::Base
   include Trailblazer::Operation::Controller
   include Trailblazer::Operation::Controller::ActiveRecord
 
+  operation document_formats: :json
+
   self.responder = ApplicationResponder
   respond_to :html, :json
 

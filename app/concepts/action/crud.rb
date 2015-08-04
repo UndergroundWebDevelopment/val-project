@@ -1,21 +1,16 @@
 require "trailblazer/operation/representer"
 
-class Channel < ActiveRecord::Base
+class Action < ActiveRecord::Base
   class Create < Trailblazer::Operation
     include CRUD
     include Responder
-    model ::Channel, :create
+    model ::Action, :create
 
     builds do |params|
       JSON if params[:format] == "json"
     end
 
-    contract do
-      property :name
-      property :description
-
-      validates :name, presence: true
-    end
+    self.contract_class = Action::Form
 
     class JSON < self
       include Representer
@@ -26,7 +21,7 @@ class Channel < ActiveRecord::Base
     end
 
     def process(params)
-      validate(params[:channel]) do |form|
+      validate(params[:action]) do |form|
         form.save
       end
     end
