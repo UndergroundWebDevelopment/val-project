@@ -4,6 +4,7 @@ class Operation < ActiveRecord::Base
 
     property :name
     property :description
+    property :event_type
 
     collection :conditions, form: Condition::Form, 
       prepopulator: ->(*) { self.conditions = [Condition.new] },
@@ -15,6 +16,6 @@ class Operation < ActiveRecord::Base
       populate_if_empty: ->(*) { Action.new },
       skip_if: :all_blank
 
-    validates :name, presence: true
+    validates :name, :event_type, presence: true
   end
 end

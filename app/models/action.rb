@@ -1,4 +1,7 @@
 class Action < ActiveRecord::Base
   belongs_to :operation
-  self.inheritance_column = nil
+
+  def perform(data_set)
+    # No-op for base class!
+  end
 end

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150803234446) do
+ActiveRecord::Schema.define(version: 20150804155410) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -25,8 +25,6 @@ ActiveRecord::Schema.define(version: 20150803234446) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "action_logs", ["action_id"], name: "index_action_logs_on_action_id", using: :btree
-
   create_table "actions", force: :cascade do |t|
     t.string   "name",           null: false
     t.text     "description"
@@ -36,8 +34,6 @@ ActiveRecord::Schema.define(version: 20150803234446) do
     t.datetime "created_at",     null: false
     t.datetime "updated_at",     null: false
   end
-
-  add_index "actions", ["operation_id"], name: "index_actions_on_operation_id", using: :btree
 
   create_table "channels", force: :cascade do |t|
     t.string   "name",        null: false
@@ -57,8 +53,6 @@ ActiveRecord::Schema.define(version: 20150803234446) do
     t.datetime "updated_at",          null: false
   end
 
-  add_index "conditions", ["operation_id"], name: "index_conditions_on_operation_id", using: :btree
-
   create_table "event_logs", force: :cascade do |t|
     t.integer  "channel_id",                 null: false
     t.string   "type",                       null: false
@@ -69,17 +63,16 @@ ActiveRecord::Schema.define(version: 20150803234446) do
     t.datetime "updated_at",                 null: false
   end
 
-  add_index "event_logs", ["channel_id"], name: "index_event_logs_on_channel_id", using: :btree
-
   create_table "operations", force: :cascade do |t|
     t.string   "name",        null: false
     t.text     "description"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.string   "event_type",  null: false
   end
 
-  add_foreign_key "action_logs", "actions"
-  add_foreign_key "actions", "operations"
-  add_foreign_key "conditions", "operations"
-  add_foreign_key "event_logs", "channels"
+  add_foreign_key "action_logs", "actions", on_delete: :cascade
+  add_foreign_key "actions", "operations", on_delete: :cascade
+  add_foreign_key "conditions", "operations", on_delete: :cascade
+  add_foreign_key "event_logs", "channels", on_delete: :cascade
 end

@@ -1,6 +1,7 @@
 = simple_form_for @form do |f|
   = f.input :name
   = f.input :description
+  = f.input :event_type
 
   = f.fields_for :conditions do |c|
     = c.input :operator_field_name

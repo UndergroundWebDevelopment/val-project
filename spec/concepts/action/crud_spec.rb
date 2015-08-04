@@ -1,14 +1,16 @@
 require 'rails_helper'
+require 'factories/operation'
+require 'factories/action'
 
 RSpec.describe Action::Create do
-  let(:operation) { Operation::Create[operation: {name: "Test Operation"}].model }
+  let(:operation) { OperationFactory.default }
 
   it "persists valid" do
     action = Action::Create[action: {
       operation: operation,
       name: "Github",
       description: "Workflows to sync github issues and milestones with other apps.",
-      type: "create_github_issue",
+      type: "Action",
     }].model
 
     expect(action.persisted?).to be true
@@ -27,15 +29,8 @@ RSpec.describe Action::Create do
 end
 
 RSpec.describe Action::Update do
-  let(:operation) { Operation::Create[operation: {name: "Test Operation"}].model }
-  let(:action) do
-    Action::Create[action: {
-      operation: operation,
-      name: "Github",
-      description: "Workflows to sync github issues and milestones with other apps.",
-      type: "create_github_issue",
-    }].model
-  end
+  let(:operation) { OperationFactory.default }
+  let(:action) { ActionFactory.default(operation: operation) }
 
   it "persists valid" do
     Action::Update[
@@ -54,15 +49,8 @@ RSpec.describe Action::Update do
 end
 
 RSpec.describe Action::Destroy do
-  let(:operation) { Operation::Create[operation: {name: "Test Operation"}].model }
-  let(:action) do
-    Action::Create[action: {
-      operation: operation,
-      name: "Github",
-      description: "Workflows to sync github issues and milestones with other apps.",
-      type: "create_github_issue",
-    }].model
-  end
+  let(:operation) { OperationFactory.default }
+  let(:action) { ActionFactory.default(operation: operation) }
 
   it "destroys valid" do
     Action::Destroy[

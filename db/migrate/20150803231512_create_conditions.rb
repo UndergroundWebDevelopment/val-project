@@ -1,7 +1,7 @@
 class CreateConditions < ActiveRecord::Migration
   def change
     create_table :conditions do |t|
-      t.references :operation, index: true, foreign_key: true, null: false
+      t.integer :operation_id, null: false
 
       t.string :operator_field_name, null: false
       t.string :operator, null: false
@@ -11,5 +11,7 @@ class CreateConditions < ActiveRecord::Migration
 
       t.timestamps null: false
     end
+
+    add_foreign_key :conditions, :operations, on_delete: :cascade
   end
 end
