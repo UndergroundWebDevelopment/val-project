@@ -1,7 +1,8 @@
 require 'rails_helper'
+require 'factories/operation'
 
 RSpec.describe ActionLog::Update do
-  let(:operation) { Operation::Create[operation: {name: "Test Operation"}].model }
+  let(:operation) { OperationFactory.default }
   let(:action) do
     Action::Create[action: {
       operation: operation,

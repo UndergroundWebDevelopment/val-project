@@ -14,9 +14,9 @@ class EventLog < ActiveRecord::Base
     contract do
       property :type
       property :payload, type: Hash
-      property :channel
+      property :channel_id, type: Integer
 
-      validates :type, :channel, presence: true
+      validates :type, :channel_id, presence: true
 
       require "disposable/twin/persisted"
       feature Disposable::Twin::Persisted

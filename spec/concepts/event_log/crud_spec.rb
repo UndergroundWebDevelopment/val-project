@@ -1,16 +1,13 @@
 require 'rails_helper'
+require 'factories/channel'
+require 'factories/event_log'
 
 RSpec.describe EventLog::Create do
-  let(:channel) do
-    Channel::Create[channel: {
-      name: "Github",
-      description: "Workflows to sync github issues and milestones with other apps.",
-    }].model
-  end
+  let(:channel) { ChannelFactory.default }
 
   it "persists valid" do
     event_log = EventLog::Create[event_log: {
-      channel: channel,
+      channel_id: channel.id,
       type: "github_issue_created",
       payload: {"foo" => "bar"},
     }].model
@@ -24,7 +21,7 @@ RSpec.describe EventLog::Create do
     expect(ProcessEventsJob).to receive(:perform_later)
 
     EventLog::Create[event_log: {
-      channel: channel,
+      channel_id: channel.id,
       type: "github_issue_created",
       payload: {"foo" => "bar"},
     }].model
@@ -40,19 +37,14 @@ RSpec.describe EventLog::Create do
 end
 
 RSpec.describe EventLog::Update do
-  let(:channel) do
-    Channel::Create[channel: {
-      name: "Github",
-      description: "Workflows to sync github issues and milestones with other apps.",
-    }].model
-  end
+  let(:channel) { ChannelFactory.default }
 
-  let(:event_log) do
-    EventLog::Create[event_log: {
+  let(:event_log) do 
+    EventLogFactory.default(
       channel: channel,
       type: "github_issue_created",
       payload: {"foo" => "bar"},
-    }].model
+    )
   end
 
   it "does not update" do

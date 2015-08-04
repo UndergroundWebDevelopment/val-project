@@ -1,15 +1,18 @@
 require 'rails_helper'
+require 'factories/operation'
 
 RSpec.describe Operation::Create do
   it "persists valid" do
     operation = Operation::Create[operation: {
       name: "Github <-> Trello Sync",
       description: "Workflows to sync github issues and both ways with Trello Cards.",
+      event_type: "github_issue_create",
     }].model
 
     expect(operation.persisted?).to be true
     expect(operation.name).to eq "Github <-> Trello Sync"
     expect(operation.description).to eq "Workflows to sync github issues and both ways with Trello Cards."
+    expect(operation.event_type).to eq "github_issue_create"
   end
 
   it "invalid" do
@@ -22,12 +25,7 @@ RSpec.describe Operation::Create do
 end
 
 RSpec.describe Operation::Update do
-  let(:operation) do
-    Operation::Create[operation: {
-      name: "Github <-> Trello Sync",
-      description: "Workflows to sync github issues and both ways with Trello Cards.",
-    }].model
-  end
+  let(:operation) { OperationFactory.default }
 
   it "persists valid" do
     Operation::Update[
@@ -46,12 +44,7 @@ RSpec.describe Operation::Update do
 end
 
 RSpec.describe Operation::Destroy do
-  let(:operation) do
-    Operation::Create[operation: {
-      name: "Github <-> Trello Sync",
-      description: "Workflows to sync github issues and both ways with Trello Cards.",
-    }].model
-  end
+  let(:operation) { OperationFactory.default }
 
   it "destroys valid" do
     Operation::Destroy[

@@ -1,5 +1,5 @@
 class ActionFactory
-  def self.default(opts)
+  def self.default(opts = {})
     defaults = {
       operation: OperationFactory.default,
       name: "Github",

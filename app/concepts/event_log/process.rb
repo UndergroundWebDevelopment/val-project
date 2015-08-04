@@ -1,4 +1,5 @@
 require "trailblazer/operation/representer"
+require 'condition/matcher'
 
 class EventLog < ActiveRecord::Base
   # The Process operation handles new event_log records that are created by
@@ -41,12 +42,17 @@ class EventLog < ActiveRecord::Base
         # Iterate over all of the operation's conditions, and continue to the
         # next operation if any do not match the data set.
         next unless operation.conditions.all? do |condition|
-          condition.matches? data_set
+          # Calling the #run method will return a boolean result whether the
+          # match was successful. We only run the actions if _all_
+          # conditions match.
+          Condition::Matcher.run(condition, data_set)
         end
 
         # If we reached this point the condtions all mactch, perform the
         # actions:
-        operation.actions.each {|action| action.perform(data_set) }
+        operation.actions.each do |action| 
+          ProcessActionJob.perform_later(action, data_set)
+        end
       end
 
       # Update the model (event) with the time it was successfully

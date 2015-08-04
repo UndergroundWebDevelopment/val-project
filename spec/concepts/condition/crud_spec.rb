@@ -1,7 +1,8 @@
 require 'rails_helper'
+require 'factories/operation'
 
 RSpec.describe Condition::Create do
-  let(:operation) { Operation::Create[operation: {name: "Test Operation"}].model }
+  let(:operation) { OperationFactory.default(name: "Test Operation") }
 
   it "persists valid" do
     condition = Condition::Create[condition: {
@@ -30,7 +31,7 @@ RSpec.describe Condition::Create do
 end
 
 RSpec.describe Condition::Update do
-  let(:operation) { Operation::Create[operation: {name: "Test Operation"}].model }
+  let(:operation) { OperationFactory.default(name: "Test Operation") }
 
   let(:condition) do
     Condition::Create[condition: {
@@ -58,7 +59,7 @@ RSpec.describe Condition::Update do
 end
 
 RSpec.describe Condition::Destroy do
-  let(:operation) { Operation::Create[operation: {name: "Test Operation"}].model }
+  let(:operation) { OperationFactory.default(name: "Test Operation") }
 
   let(:condition) do
     Condition::Create[condition: {
