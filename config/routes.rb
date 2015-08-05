@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :channels
   resources :conditions
   resources :event_logs, only: [:index, :show, :create]
+  post "event_logs/:type(.:format)", controller: :event_logs, action: :create
   resources :operations
 
   # The priority is based upon order of creation: first created -> highest priority.

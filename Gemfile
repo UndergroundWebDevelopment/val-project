@@ -91,6 +91,10 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   # Capybara for acceptance / integration testing of the UI
   gem 'capybara'
+
+  # Rspec api documentation supports API acceptance tests that double as
+  # API documentation generators
+  gem 'rspec_api_documentation'
 end
 
 # bundle exec rake doc:rails generates the API under doc/api.

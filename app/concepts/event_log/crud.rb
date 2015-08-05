@@ -54,6 +54,14 @@ class EventLog < ActiveRecord::Base
     contract do
       property :type, writeable: false
       property :payload, type: Hash, writeable: false
+      property :channel_id, type: Integer, writeable: false
+    end
+
+    def process(params)
+      validate(params[:event_log]) do |form|
+        form.save
+        dispatch!
+      end
     end
   end
 end
