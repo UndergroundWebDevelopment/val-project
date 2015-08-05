@@ -9,6 +9,10 @@ class EventLogsController < ApplicationController
   end
 
   def create
+    respond EventLog::Create
+  end
+
+  def webhook
     run EventLog::Create do |op|
       return head status: :created
     end
@@ -19,10 +23,10 @@ class EventLogsController < ApplicationController
   private
 
   def process_params!(params)
-    # Custom param processing for the create method. That method gets the
+    # Custom param processing for the webhook method. That method gets the
     # type passed in through the URL, and the channel_id also needs to be set
     # from the session.
-    if params[:action] == "create"
+    if params[:action] == "webhook"
       params[:event_log] = {}
       params[:event_log].tap do |e|
         e[:type] = params[:type]

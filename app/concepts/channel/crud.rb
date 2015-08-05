@@ -14,7 +14,11 @@ class Channel < ActiveRecord::Base
       property :name
       property :description
 
-      validates :name, presence: true
+      property :type
+
+      property :oauth_token
+
+      validates :name, :type, presence: true
     end
 
     class JSON < self

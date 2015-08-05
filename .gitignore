@@ -13,3 +13,10 @@
 /tmp
 
 /vendor/postgresql
+
+# Personal env variables:
+.env
+.envrc
+
+# Ngrok config
+.ngrok

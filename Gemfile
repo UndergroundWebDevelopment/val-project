@@ -34,6 +34,9 @@ gem "pundit"
 gem "responders"
 # Roar gives us representers (https://github.com/apotonick/roar)
 gem "roar-rails"
+# TNT is a simple little gem that makes building custom exception classes
+# easy. (https://github.com/ahawkins/tnt)
+gem 'tnt'
 
 
 ## Rails Front-End UI compontents:
@@ -59,6 +62,11 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'bootstrap-sass', '~> 3.3.5'
 # Simple form, form helpers with support for bootstrap styling.
 gem 'simple_form'
+
+
+## External systems (API) connectors:
+# Github (https://github.com/peter-murach/github)
+gem "github_api"
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

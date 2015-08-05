@@ -1,10 +1,12 @@
 require 'application_responder'
 require 'trailblazer/operation/controller/active_record'
+require 'tnt'
+
+# Define some custom error constants that we can throw throughout the code.
+NotFound = Tnt.boom AbstractController::ActionNotFound
 
 class ApplicationController < ActionController::Base
-  # Cause trailblazer to create named instance variables, e.g. @song
   include Trailblazer::Operation::Controller
-  include Trailblazer::Operation::Controller::ActiveRecord
 
   operation document_formats: :json
 

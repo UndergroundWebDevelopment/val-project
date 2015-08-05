@@ -4,8 +4,19 @@ Rails.application.routes.draw do
   resources :channels
   resources :conditions
   resources :event_logs, only: [:index, :show, :create]
-  post "event_logs/:type(.:format)", controller: :event_logs, action: :create
   resources :operations
+
+  # This endppoint is specifically for channel webhooks to hit. Under the hood
+  # it's treated as an HTTP request to a custom controller action that deals
+  # with the fact that we don't have control over the _content_ of the webhook,
+  # but do have control over the URL, etc. So we tag some extra data (like
+  # event type) onto the URL and do a couple other tricks. Using a custom route
+  # and controller method for this lets us _also_ maintain a POST
+  # /event_logs#create route that responds to a stricter spec.
+  post "event_logs/webhook/:type(.:format)", controller: :event_logs, action: :webhook
+
+  get "channels/connect/callback/:service", controller: :channels, action: :connection_callback
+  get "channels/connect/:service", controller: :channels, action: :authorize_connection
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

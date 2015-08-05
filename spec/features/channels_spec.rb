@@ -1,10 +1,12 @@
 require 'rails_helper'
+require 'factories/channel'
 
 feature "Creating a channel " do
   scenario "with valid options" do
     visit 'channels/new'
     within("#new_channel") do
       fill_in 'Name', with: "Trello"
+      fill_in 'Type', with: "github"
     end
     click_button "Create Channel"
     expect(page).to have_content "Trello"
@@ -13,10 +15,7 @@ end
 
 feature "Updating a channel" do
   given(:channel) do
-    Channel::Create[channel: {
-      name: "Github",
-      description: "Workflows to sync github issues and milestones with other apps.",
-    }].model
+    ChannelFactory.default
   end
 
   scenario "with valid options" do

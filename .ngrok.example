@@ -1,0 +1,6 @@
+auth_token: <your-auth-token>
+tunnels:
+  api:
+    subdomain: <your-subdomain>
+    proto: 
+      https: 3000

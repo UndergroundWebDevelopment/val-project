@@ -8,7 +8,7 @@ resource "EventLogs" do
   let(:type) { "github_issue_created" }
   let(:payload) { { "extra" => "random" } }
 
-  post "/event_logs/:type" do
+  post "/event_logs/webhook/:type" do
     parameter :type, "The type of event being sent."
 
     let(:raw_post) do
