@@ -37,6 +37,13 @@ gem "roar-rails"
 # TNT is a simple little gem that makes building custom exception classes
 # easy. (https://github.com/ahawkins/tnt)
 gem 'tnt'
+# Tyrant is developed by the creator of trailbalzer, and handled
+# authentication.
+gem 'tyrant', github: "apotonick/tyrant", branch: "master"
+gem "warden" # Warden is a dependency of tyrant, but not included in it's gemspec yet.
+
+# Faker creates fake names, emails, urls, etc. Great for tests.
+gem 'faker'
 
 
 ## Rails Front-End UI compontents:

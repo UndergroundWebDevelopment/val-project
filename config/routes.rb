@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  root 'home#index'
+
   resources :actions
   resources :action_logs, only: [:index, :show]
   resources :channels
@@ -17,6 +19,15 @@ Rails.application.routes.draw do
 
   get "channels/connect/callback/:service", controller: :channels, action: :connection_callback
   get "channels/connect/:service", controller: :channels, action: :authorize_connection
+
+  # Authentication (sign up, sign in, sign out, etc) routes:
+  get "sessions/sign_in"
+  post "sessions/sign_up"
+  get "sessions/sign_up_form"
+  get "sessions/sign_out"
+  get "sessions/sign_in_form"
+  post "sessions/sign_in"
+
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
