@@ -1,10 +1,9 @@
 require "trailblazer/operation/representer"
 
 class Action < ActiveRecord::Base
-  # The Process operation handles new event_log records that are created by
-  # webhooks. It is responsible for attempting to match and execute this
-  # event_log against candidate operations, and then marking the event_log
-  # record as processed when this has been done.
+  # The Action::Process operation handles executing a specific action against a
+  # specific data set. It tracks meta-data about the action's execution (start
+  # time, status, etc) in the ActionLog model.
   class Process < Trailblazer::Operation
 
     def process(model, data_set)

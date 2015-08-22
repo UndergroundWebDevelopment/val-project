@@ -1,8 +1,23 @@
 require 'rails_helper'
 require 'factories/channel'
+require 'factories/user'
 
 feature "Creating a channel " do
+  given(:password) { Faker::Internet.password }
+  given!(:user) { UserFactory.default(password: password) }
+
+  background do
+    # Sign in:
+    visit 'sessions/sign_in_form'
+    within("#new_session") do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: password
+    end
+    click_button "Sign in!"
+  end
+
   scenario "with valid options" do
+    # Create a new channel:
     visit 'channels/new'
     within("#new_channel") do
       fill_in 'Name', with: "Trello"
@@ -14,8 +29,21 @@ feature "Creating a channel " do
 end
 
 feature "Updating a channel" do
+  given(:password) { Faker::Internet.password }
+  given!(:user) { UserFactory.default(password: password) }
+
+  background do
+    # Sign in:
+    visit 'sessions/sign_in_form'
+    within("#new_session") do
+      fill_in 'Email', with: user.email
+      fill_in 'Password', with: password
+    end
+    click_button "Sign in!"
+  end
+
   given(:channel) do
-    ChannelFactory.default
+    ChannelFactory.default({}, user)
   end
 
   scenario "with valid options" do

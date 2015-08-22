@@ -1,4 +1,5 @@
 class Operation < ActiveRecord::Base
+  belongs_to :user
   has_many :conditions
   has_many :actions
 

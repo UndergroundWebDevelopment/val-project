@@ -10,6 +10,10 @@ class ApplicationController < ActionController::Base
 
   operation document_formats: :json
 
+  # Sets current_user in the params hash, which will be passed into
+  # trailblazer for authorization
+  before_action :set_current_user
+
   self.responder = ApplicationResponder
   respond_to :html, :json
 
@@ -23,4 +27,12 @@ class ApplicationController < ActionController::Base
     Tyrant::Session.new(request.env['warden'])
   end
   helper_method :tyrant
+
+  private
+
+  def set_current_user
+    if tyrant.signed_in?
+      params[:current_user] = tyrant.current_user
+    end
+  end
 end

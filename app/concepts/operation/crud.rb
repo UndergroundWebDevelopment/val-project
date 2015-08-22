@@ -4,6 +4,8 @@ class Operation < ActiveRecord::Base
   class Create < Trailblazer::Operation
     include CRUD
     include Responder
+    include Policy::Pundit
+    policy OperationPolicy, :create?
     model ::Operation, :create
 
     builds do |params|
@@ -25,13 +27,22 @@ class Operation < ActiveRecord::Base
         form.save
       end
     end
+
+    private
+
+    def setup_model!(params)
+      model.user = params[:current_user]
+    end
   end
 
   class Update < Create
+    policy OperationPolicy, :update?
     action :update
   end
 
   class Destroy < Update
+    policy OperationPolicy, :destroy?
+
     def process(params)
       model.destroy!
     end

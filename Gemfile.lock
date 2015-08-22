@@ -1,4 +1,13 @@
 GIT
+  remote: git://github.com/apotonick/trailblazer.git
+  revision: a79a7ddc8c19f4dac1dac5bbb243eb1c4052bea9
+  branch: policy
+  specs:
+    trailblazer (0.3.3)
+      reform (>= 1.2.0)
+      uber (>= 0.0.10)
+
+GIT
   remote: git://github.com/apotonick/tyrant.git
   revision: ad2d927b99702b4e52654f0e52d078c530bd64f2
   branch: master
@@ -247,9 +256,6 @@ GEM
     thread_safe (0.3.5)
     tilt (1.4.1)
     tnt (0.1.0)
-    trailblazer (0.3.3)
-      reform (>= 1.2.0)
-      uber (>= 0.0.10)
     turbolinks (2.5.3)
       coffee-rails
     tzinfo (1.2.2)
@@ -295,7 +301,7 @@ DEPENDENCIES
   simple_form
   spring
   tnt
-  trailblazer
+  trailblazer!
   turbolinks
   tyrant!
   uglifier (>= 1.3.0)

@@ -20,7 +20,7 @@ gem 'rails', '4.2.3'
 
 # Trailblazer framework on top of rails
 # # (https://github.com/apotonick/trailblazer)
-gem 'trailblazer'
+gem 'trailblazer', github: 'apotonick/trailblazer', branch: 'policy'
 
 # Use postgresql as the database for Active Record
 gem 'pg'

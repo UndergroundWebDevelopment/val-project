@@ -1,4 +1,4 @@
-class OperationPolicy < ApplicationPolicy
+class ChannelPolicy < ApplicationPolicy
   def create?
     record.user == user
   end
