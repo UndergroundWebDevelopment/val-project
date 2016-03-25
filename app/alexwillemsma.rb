@@ -1,8 +1,18 @@
+# Require base route, parent class that provides common functionality to all
+# sub-apps:
+require File.join(File.dirname(__FILE__), "base_route.rb")
+
+# Require all models:
+Dir.glob(File.join(File.dirname(__FILE__), 'models/**/*.rb')) {|match| require match }
+
+# Require all concepts files:
+Dir.glob(File.join(File.dirname(__FILE__), 'concepts/**/*.rb')) {|match| require match }
+
+# Core app, this is mounted by the server and requires individual concepts
+# (which are really their own separate Sinatra Apps)
 module AlexWillemsma
-  class App < Sinatra::Base
-    def environment
-      @environment ||= Environment.new
-    end
+  class App < BaseRoute
+    use Profile::Routes
 
     get "/" do
       "Hello world!"

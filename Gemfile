@@ -16,6 +16,16 @@ gem "sequel"
 # the pg gem provides postgres support for sequel:
 gem "pg"
 
+# Trailblazer is a framework on top of Sinatra that provides operations,
+# representers, contracts, and a whole lot more. See http://trailblazer.to/
+gem "trailblazer"
+# Trailblazer uses representable for its rperesenters, and to support
+# json requires multi_json as a dependency:
+gem "multi_json"
+
+# Validation dsl:
+gem "dry-validation"
+
 # Rake to run maintenance tasks and one-off jobs, e.g. database migrations:
 gem "rake"
 # Cocaine assists with running command line arguments, e.g. DB

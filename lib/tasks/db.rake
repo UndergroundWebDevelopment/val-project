@@ -86,6 +86,6 @@ namespace :db do
   end
 
   def database
-    AlexWillemsma::Environment.new.database
+    AlexWillemsma::DB
   end
 end

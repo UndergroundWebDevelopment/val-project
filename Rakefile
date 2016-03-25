@@ -1,5 +1,3 @@
-require 'rubygems'
-require 'bundler/setup'
 require 'dotenv/tasks'
 
 Dir.glob('lib/tasks/*.rake').each { |r| import r }
