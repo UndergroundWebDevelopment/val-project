@@ -10,3 +10,22 @@ gem "puma-heroku"
 # Sinatra is a minimalist Ruby framework. Require "sinatra/base" since we're
 # using the modular style:
 gem "sinatra", require: "sinatra/base"
+
+# sequel is a database library:
+gem "sequel"
+# the pg gem provides postgres support for sequel:
+gem "pg"
+
+# Rake to run maintenance tasks and one-off jobs, e.g. database migrations:
+gem "rake"
+# Cocaine assists with running command line arguments, e.g. DB
+# manipulations:
+gem "cocaine"
+
+group :development, :test do
+  # Allows us to load environment variables defined in .env into ruby
+  # code. This is done automatically by foreman, but dotenv lets us re-use
+  # these env variables in rake tasks and other places the development
+  # environment is used:
+  gem "dotenv"
+end

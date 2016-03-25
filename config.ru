@@ -1,7 +1,5 @@
 require "rubygems"
 require "bundler"
-
-Bundler.require
-
+require "./config/environment"
 require "./app/alexwillemsma"
 run AlexWillemsma::App
