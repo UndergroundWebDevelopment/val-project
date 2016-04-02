@@ -1,3 +1,11 @@
+GIT
+  remote: git://github.com/apotonick/roar.git
+  revision: 623ee84002ddb06faf410acd8af147b2c13ed7a8
+  branch: 1-1
+  specs:
+    roar (1.0.3)
+      representable (>= 2.4.0, < 3.1.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -12,7 +20,7 @@ GEM
     cocaine (0.5.8)
       climate_control (>= 0.0.3, < 1.0)
     concurrent-ruby (1.0.1)
-    declarative (0.0.6)
+    declarative (0.0.7)
       uber (>= 0.0.15)
     disposable (0.2.6)
       declarative (~> 0.0.6)
@@ -42,10 +50,14 @@ GEM
       dry-equalizer (~> 0.2)
       dry-logic (~> 0.2, >= 0.2.1)
       dry-types (~> 0.6, >= 0.6.0)
+    ffi (1.9.10)
     i18n (0.7.0)
     inflecto (0.0.2)
     json (1.8.3)
     kleisli (0.2.7)
+    listen (3.0.6)
+      rb-fsevent (>= 0.9.3)
+      rb-inotify (>= 0.9.7)
     minitest (5.8.4)
     multi_json (1.11.2)
     pg (0.18.4)
@@ -56,6 +68,9 @@ GEM
     rack-protection (1.5.3)
       rack
     rake (11.1.1)
+    rb-fsevent (0.9.7)
+    rb-inotify (0.9.7)
+      ffi (>= 0.5.0)
     reform (2.1.0)
       disposable (>= 0.2.2, < 0.3.0)
       representable (>= 2.4.0, < 3.1.0)
@@ -63,6 +78,8 @@ GEM
     representable (3.0.0)
       declarative (~> 0.0.5)
       uber (~> 0.0.15)
+    rerun (0.11.0)
+      listen (~> 3.0)
     sequel (4.32.0)
     sinatra (1.4.7)
       rack (~> 1.5)
@@ -90,6 +107,8 @@ DEPENDENCIES
   puma
   puma-heroku
   rake
+  rerun
+  roar!
   sequel
   sinatra
   trailblazer

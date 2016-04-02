@@ -19,6 +19,9 @@ gem "pg"
 # Trailblazer is a framework on top of Sinatra that provides operations,
 # representers, contracts, and a whole lot more. See http://trailblazer.to/
 gem "trailblazer"
+# Roar provides advanced representer support, for serializing
+# data to and from json, xml, and other formats.
+gem "roar", github: 'apotonick/roar', branch: '1-1'
 # Trailblazer uses representable for its rperesenters, and to support
 # json requires multi_json as a dependency:
 gem "multi_json"
@@ -39,3 +42,7 @@ group :development, :test do
   # environment is used:
   gem "dotenv"
 end
+
+# Install rerun in develpment, to automatically re-load code when changes
+# are made:
+gem "rerun", group: :development

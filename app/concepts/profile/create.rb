@@ -9,6 +9,12 @@ module AlexWillemsma
         include Reform::Form::Dry::Validations
       end
 
+      representer do
+        include Roar::JSON::JSONAPI
+        type :profiles
+        property :id
+      end
+
       def model!(_)
         Profile.new
       end

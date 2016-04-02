@@ -7,6 +7,7 @@ Bundler.require(:default, ENV["RACK_ENV"])
 require "trailblazer/autoloading"
 require "reform/form/dry"
 require 'representable/json'
+require 'roar/json/json_api'
 
 module AlexWillemsma
   DB = if ENV.key? "DATABASE_URL"
