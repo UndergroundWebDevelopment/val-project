@@ -1,16 +1,16 @@
 module AlexWillemsma
   class Profile
     class Routes < BaseRoute
-      get "/profile/:id" do
+      get "/profiles/:id" do
         Update.present(params).to_json
       end
 
-      post "/profile" do
+      post "/profiles" do
         params[:profile] = request.body.read
         Create.(params).to_json
       end
 
-      put "/profile/:id" do
+      put "/profiles/:id" do
         params[:profile] = request.body.read
         Update.(params).to_json
       end

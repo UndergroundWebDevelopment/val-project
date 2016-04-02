@@ -1,6 +1,15 @@
 module AlexWillemsma
   class BaseRoute < Sinatra::Base
+    register Sinatra::CrossOrigin
+
     set :show_exceptions, :after_handler
+
+    configure do
+      enable :cross_origin
+    end
+
+    set :allow_origin, ENV.fetch("UI_URL")
+    set :allow_methods, [:get, :post, :put, :patch, :delete, :options]
 
     # Set content type specifying JSON-API: 
     before do
@@ -20,6 +29,14 @@ module AlexWillemsma
       end
       halt 406, "Not Acceptable" if valid_accepts.empty?
       halt 415, "Unsupported Media Type" if json_api_accept_with_args
+    end
+
+    # Handle options requests, used for the CORS standard 'preflight' requests:
+    options "*" do
+      response.headers["Allow"] = "HEAD,GET,PUT,POST,DELETE,OPTIONS"
+      response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
+
+      200
     end
   end
 end

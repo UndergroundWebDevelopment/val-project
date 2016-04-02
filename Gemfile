@@ -10,6 +10,8 @@ gem "puma-heroku"
 # Sinatra is a minimalist Ruby framework. Require "sinatra/base" since we're
 # using the modular style:
 gem "sinatra", require: "sinatra/base"
+# Sinatra extension to support Cross-Origin requests:
+gem "sinatra-cross_origin", "~> 0.3.1", require: "sinatra/cross_origin"
 
 # sequel is a database library:
 gem "sequel"
