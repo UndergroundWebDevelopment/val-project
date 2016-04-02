@@ -1,5 +1,10 @@
 #!/usr/bin/env ruby
-require 'irb'
+require 'rubygems'
+require 'bundler/setup'
+# Require console specific gems (pry & plugins)
+Bundler.require(:console)
+
+require 'pry'
 require_relative '../config/environment'
 require_relative '../app/alexwillemsma'
-IRB.start
+Pry.start

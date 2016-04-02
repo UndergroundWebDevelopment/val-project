@@ -43,6 +43,19 @@ group :development, :test do
   gem "dotenv"
 end
 
-# Install rerun in develpment, to automatically re-load code when changes
-# are made:
-gem "rerun", group: :development
+group :development do
+  # Install rerun in develpment, to automatically re-load code when changes
+  # are made:
+  gem "rerun"
+end
+
+# These gems are _only_ needed when running a console, and so are grouped
+# separately:
+group :console do
+  gem "pry"
+  gem "pry-byebug"
+  gem "pry-doc"
+  gem "pry-git"
+  gem "pry-rails"
+  gem "pry-remote"
+end
