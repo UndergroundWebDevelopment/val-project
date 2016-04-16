@@ -4,6 +4,9 @@ require 'bundler/setup'
 # Require console specific gems (pry & plugins)
 Bundler.require(:console)
 
+require 'dotenv'
+Dotenv.load
+
 require 'pry'
 require_relative '../config/environment'
 require_relative '../app/alexwillemsma'

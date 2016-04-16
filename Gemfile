@@ -24,11 +24,11 @@ gem "trailblazer"
 # Roar provides advanced representer support, for serializing
 # data to and from json, xml, and other formats.
 gem "roar", github: 'apotonick/roar', branch: '1-1'
-# Trailblazer uses representable for its rperesenters, and to support
+# Trailblazer uses representable for its representers, and to support
 # json requires multi_json as a dependency:
 gem "multi_json"
 
-# Validation dsl:
+# Data validation dsl:
 gem "dry-validation"
 
 # Rake to run maintenance tasks and one-off jobs, e.g. database migrations:
@@ -54,6 +54,7 @@ end
 # These gems are _only_ needed when running a console, and so are grouped
 # separately:
 group :console do
+  gem "dotenv"
   gem "pry"
   gem "pry-byebug"
   gem "pry-doc"

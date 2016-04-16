@@ -2,3 +2,4 @@ vendor/postgresql
 .env
 .irb_history
 .envrc
+.env
