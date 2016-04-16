@@ -37,6 +37,9 @@ gem "rake"
 # manipulations:
 gem "cocaine"
 
+# Secure hashing algorithms for passwords
+gem "bcrypt"
+
 group :development, :test do
   # Allows us to load environment variables defined in .env into ruby
   # code. This is done automatically by foreman, but dotenv lets us re-use

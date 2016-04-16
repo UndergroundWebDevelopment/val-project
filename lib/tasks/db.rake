@@ -79,6 +79,14 @@ namespace :db do
     database.execute_ddl("alter schema public owner to #{args[:owner]}")
   end
 
+  task :seed, [:email, :password, :first_name, :last_name] => :environment do |t, args|
+    raise "Email is required. Proper usage: `rake db:seed[email, password, first_name, last_name]`" unless args[:email]
+    raise "Password is required. Proper usage: `rake db:seed[email, password, first_name, last_name]`" unless args[:password]
+
+    password_hash = BCrypt::Password.create(args[:password])
+    database.run("INSERT INTO users (first_name, last_name, email, password_hash) VALUES(#{database.literal(args[:first_name])}, #{database.literal(args[:last_name])}, #{database.literal(args[:email])}, #{database.literal(password_hash)});")
+  end
+
   private
 
   def dbconfig

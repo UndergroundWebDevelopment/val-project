@@ -6,7 +6,8 @@ Sequel.migration do
       add_column :date_of_birth, Date
       add_column :public_date_of_birth, FalseClass, default: false
 
-      add_column :slug, String, null: false, index: {unique: true}
+      add_column :slug, String, null: false
+      add_index :slug, unique: true
 
       set_column_not_null :first_name
     end
