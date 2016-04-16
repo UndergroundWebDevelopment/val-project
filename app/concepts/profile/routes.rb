@@ -1,4 +1,4 @@
-module AlexWillemsma
+module ValProject
   class Profile
     class Routes < BaseRoute
       get "/profiles/:id" do

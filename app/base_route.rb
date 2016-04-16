@@ -1,4 +1,4 @@
-module AlexWillemsma
+module ValProject
   class BaseRoute < Sinatra::Base
     register Sinatra::CrossOrigin
 

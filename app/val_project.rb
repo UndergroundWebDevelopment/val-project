@@ -10,7 +10,7 @@ Dir.glob(File.join(File.dirname(__FILE__), 'concepts/**/*.rb')) {|match| require
 
 # Core app, this is mounted by the server and requires individual concepts
 # (which are really their own separate Sinatra Apps)
-module AlexWillemsma
+module ValProject
   class App < BaseRoute
     use Profile::Routes
 

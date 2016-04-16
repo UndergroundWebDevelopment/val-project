@@ -9,7 +9,7 @@ require "reform/form/dry"
 require 'representable/json'
 require 'roar/json/json_api'
 
-module AlexWillemsma
+module ValProject
   DB = if ENV.key? "DATABASE_URL"
          Sequel.connect(ENV["DATABASE_URL"])
        else

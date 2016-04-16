@@ -1,3 +1,3 @@
 require "./config/environment"
-require "./app/alexwillemsma"
-run AlexWillemsma::App
+require "./app/val_project"
+run ValProject::App

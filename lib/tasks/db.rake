@@ -86,6 +86,6 @@ namespace :db do
   end
 
   def database
-    AlexWillemsma::DB
+    ValProject::DB
   end
 end

@@ -1,4 +1,4 @@
-module AlexWillemsma
+module ValProject
   class Profile
     class Update < Create
       def model!(params)
