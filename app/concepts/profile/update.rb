@@ -2,7 +2,11 @@ module ValProject
   class Profile
     class Update < Create
       def model!(params)
-        Profile[params[:id]]
+        if params[:id] =~ UUID_REGEX
+          Profile.first! id: params[:id]
+        else
+          Profile.first! slug: params[:id]
+        end
       end
     end
   end

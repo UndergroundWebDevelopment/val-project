@@ -11,7 +11,7 @@ namespace :db do
 
   desc "Migrates the databse back one step from the current version"
   task :rollback => :environment do
-    version = database[:schema_info].first.try(:[], :version)
+    version = database[:schema_info].first[:version]
 
     Rake::Task["db:migrate"].invoke(version - 1) if version
   end

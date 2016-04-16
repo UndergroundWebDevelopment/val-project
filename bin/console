@@ -9,5 +9,5 @@ Dotenv.load
 
 require 'pry'
 require_relative '../config/environment'
-require_relative '../app/alexwillemsma'
+require_relative '../app/val_project'
 Pry.start

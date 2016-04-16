@@ -6,6 +6,9 @@ module ValProject
       contract do
         property :first_name
         property :last_name
+        property :public_description
+        property :date_of_birth
+        property :tagline
         include Reform::Form::Dry::Validations
       end
 
@@ -13,6 +16,7 @@ module ValProject
         include Roar::JSON::JSONAPI
         type :profiles
         property :id
+        property :date_of_birth, if: ->(represented:, **) { represented.public_date_of_birth? }
       end
 
       def model!(_)
