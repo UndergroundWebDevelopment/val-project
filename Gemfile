@@ -43,6 +43,13 @@ gem "cocaine"
 # Secure hashing algorithms for passwords
 gem "bcrypt"
 
+# Rack session sequel provides a sequel (DB) backed session store:
+gem "rack-session-sequel"
+
+# Warden provides a lightweight rack-based authentication framework:
+gem "warden"
+gem "warden-oauth2-strategies", require: "warden-oauth2"
+
 group :development, :test, :console do
   # Allows us to load environment variables defined in .env into ruby
   # code. This is done automatically by foreman, but dotenv lets us re-use

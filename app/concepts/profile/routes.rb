@@ -2,6 +2,7 @@ module ValProject
   class Profile
     class Routes < BaseRoute
       get "/profiles/:id" do
+        warden.authenticate!
         Update.present(params).to_json
       end
 

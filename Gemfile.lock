@@ -99,6 +99,9 @@ GEM
     rack (1.6.4)
     rack-protection (1.5.3)
       rack
+    rack-session-sequel (0.0.1)
+      rack
+      sequel
     rake (11.1.1)
     rb-fsevent (0.9.7)
     rb-inotify (0.9.7)
@@ -128,6 +131,10 @@ GEM
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
     uber (0.0.15)
+    warden (1.2.6)
+      rack (>= 1.0)
+    warden-oauth2-strategies (0.1.2)
+      warden
     yard (0.8.7.6)
 
 PLATFORMS
@@ -149,6 +156,7 @@ DEPENDENCIES
   pry-remote
   puma
   puma-heroku
+  rack-session-sequel
   rake
   rerun
   roar!
@@ -156,6 +164,8 @@ DEPENDENCIES
   sinatra
   sinatra-cross_origin (~> 0.3.1)
   trailblazer
+  warden
+  warden-oauth2-strategies
 
 BUNDLED WITH
    1.11.2

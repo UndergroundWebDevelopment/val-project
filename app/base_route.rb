@@ -39,37 +39,14 @@ module ValProject
       200
     end
 
-    error UnauthorizedError do
-      errors_object = {
-        errors: [{
-          status: 401,
-          code: "Unauthorized",
-          title: "Unauthorized",
-          detail: env['sinatra.error'].message,
-        }]
-      }
-
-      halt 401, errors_object.to_json
+    before do
+      params[:warden] = warden
     end
-    
+
     private
 
-    attr_accessor :params
-
-    def authenticate
-      if env.key? "HTTP_AUTHORIZATION"
-        sesh = Session.first id: env["HTTP_AUTHORIZATION"].gsub("Token", "").strip
-        if sesh
-          params[:session] = sesh
-          return true
-        end
-      end
-
-      false
-    end
-
-    def require_authenticated_user!
-      raise UnauthorizedError.new "You must log in to access that resource." unless authenticate
+    def warden
+      env["warden"]
     end
   end
 end

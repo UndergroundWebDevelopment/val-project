@@ -17,6 +17,10 @@ module ValProject
   UUID_REGEX = /^[0-9A-F]{8}-[0-9A-F]{4}-4[0-9A-F]{3}-[89AB][0-9A-F]{3}-[0-9A-F]{12}$/i
 
   class App < BaseRoute
+    use Rack::Session::Sequel, db: DB, table_name: :sessions # Session storage in our DB.
+    # Authentication::Config sets up warden:
+    include Authentication::Config
+
     use User::Routes
     use Profile::Routes
 
