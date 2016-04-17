@@ -4,6 +4,7 @@ require 'rubygems'
 require 'bundler/setup'
 Bundler.require(:default, ENV["RACK_ENV"])
 
+require 'json'
 require "trailblazer/autoloading"
 require "reform/form/dry"
 require 'representable/json'

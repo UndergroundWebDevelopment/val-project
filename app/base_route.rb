@@ -2,7 +2,7 @@ module ValProject
   class BaseRoute < Sinatra::Base
     register Sinatra::CrossOrigin
 
-    set :show_exceptions, :after_handler
+    set :show_exceptions, false
 
     configure do
       enable :cross_origin
@@ -37,6 +37,39 @@ module ValProject
       response.headers["Access-Control-Allow-Headers"] = "X-Requested-With, X-HTTP-Method-Override, Content-Type, Cache-Control, Accept"
 
       200
+    end
+
+    error UnauthorizedError do
+      errors_object = {
+        errors: [{
+          status: 401,
+          code: "Unauthorized",
+          title: "Unauthorized",
+          detail: env['sinatra.error'].message,
+        }]
+      }
+
+      halt 401, errors_object.to_json
+    end
+    
+    private
+
+    attr_accessor :params
+
+    def authenticate
+      if env.key? "HTTP_AUTHORIZATION"
+        sesh = Session.first id: env["HTTP_AUTHORIZATION"].gsub("Token", "").strip
+        if sesh
+          params[:session] = sesh
+          return true
+        end
+      end
+
+      false
+    end
+
+    def require_authenticated_user!
+      raise UnauthorizedError.new "You must log in to access that resource." unless authenticate
     end
   end
 end

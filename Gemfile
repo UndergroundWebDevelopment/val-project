@@ -29,7 +29,10 @@ gem "roar", github: 'apotonick/roar', branch: '1-1'
 gem "multi_json"
 
 # Data validation dsl:
-gem "dry-validation"
+# NOTE: Hard-coded to an older version, as Roar does not seem to be
+# compatible with the latest versions:
+gem "dry-validation", "~> 0.4"
+gem "dry-logic", "0.1.0"
 
 # Rake to run maintenance tasks and one-off jobs, e.g. database migrations:
 gem "rake"
@@ -40,7 +43,7 @@ gem "cocaine"
 # Secure hashing algorithms for passwords
 gem "bcrypt"
 
-group :development, :test do
+group :development, :test, :console do
   # Allows us to load environment variables defined in .env into ruby
   # code. This is done automatically by foreman, but dotenv lets us re-use
   # these env variables in rake tasks and other places the development
@@ -57,7 +60,6 @@ end
 # These gems are _only_ needed when running a console, and so are grouped
 # separately:
 group :console do
-  gem "dotenv"
   gem "pry"
   gem "pry-byebug"
   gem "pry-doc"

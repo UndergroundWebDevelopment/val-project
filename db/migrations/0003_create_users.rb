@@ -14,8 +14,8 @@ Sequel.migration do
     run "CREATE UNIQUE INDEX ON users ((lower(email)))"
 
     alter_table :profiles do
-      add_column :owned_by_user_id, :uuid
-      add_foreign_key [:owned_by_user_id], :users, name: :profile_owned_by_user_fk
+      add_column :owned_by_user_id, :uuid, null: false
+      add_foreign_key [:owned_by_user_id], :users, name: :profile_owned_by_user_fk, on_update: :cascade, on_delete: :cascade
     end
   end
 
