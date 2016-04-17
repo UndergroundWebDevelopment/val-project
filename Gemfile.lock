@@ -97,6 +97,7 @@ GEM
     puma-heroku (1.0.0)
       puma (~> 3.0)
     rack (1.6.4)
+    rack-cors (0.4.0)
     rack-protection (1.5.3)
       rack
     rack-session-sequel (0.0.1)
@@ -156,6 +157,7 @@ DEPENDENCIES
   pry-remote
   puma
   puma-heroku
+  rack-cors
   rack-session-sequel
   rake
   rerun

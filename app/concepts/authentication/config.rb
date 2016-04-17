@@ -2,6 +2,23 @@ module ValProject
   module Authentication 
     module Config
       def self.included(including)
+        setup_cors(including)
+        setup_warden(including)
+      end
+
+      def self.setup_cors(including)
+        including.use Rack::Cors do
+          allow do
+            origins ENV.fetch("UI_URL")
+            resource '*',
+                :methods => [:get, :post, :delete, :put, :patch, :options, :head],
+                :headers => :any,
+                :max_age => 600
+          end
+        end
+      end
+
+      def self.setup_warden(including)
         # Configure warden. Must come after the session store, but before any rack
         # apps (e.g. sinatra modular apps) that need authentication.
         Warden::OAuth2.configure do |config|

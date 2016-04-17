@@ -50,6 +50,10 @@ gem "rack-session-sequel"
 gem "warden"
 gem "warden-oauth2-strategies", require: "warden-oauth2"
 
+# Rack middleware for cors support, so that we can handle cors even for
+# Warden requests:
+gem 'rack-cors', :require => 'rack/cors'
+
 group :development, :test, :console do
   # Allows us to load environment variables defined in .env into ruby
   # code. This is done automatically by foreman, but dotenv lets us re-use

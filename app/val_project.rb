@@ -4,6 +4,7 @@ Dir.glob(File.join(File.dirname(__FILE__), 'errors/**/*.rb')) {|match| require m
 # Require base route, parent class that provides common functionality to all
 # sub-apps:
 require File.join(File.dirname(__FILE__), "base_route.rb")
+require File.join(File.dirname(__FILE__), "jsonapi_base_route.rb")
 
 # Require all models:
 Dir.glob(File.join(File.dirname(__FILE__), 'models/**/*.rb')) {|match| require match }
@@ -18,7 +19,7 @@ module ValProject
 
   class App < BaseRoute
     use Rack::Session::Sequel, db: DB, table_name: :sessions # Session storage in our DB.
-    # Authentication::Config sets up warden:
+    # Authentication::Config sets up warden and cors:
     include Authentication::Config
 
     use User::Routes
