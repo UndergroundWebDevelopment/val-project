@@ -7,6 +7,7 @@ Bundler.require(:default, ENV["RACK_ENV"])
 require 'json'
 require "trailblazer/autoloading"
 require "reform/form/dry"
+require "reform/form/coercion"
 require 'representable/json'
 require 'roar/json/json_api'
 

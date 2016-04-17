@@ -27,6 +27,8 @@ gem "roar", github: 'apotonick/roar', branch: '1-1'
 # Trailblazer uses representable for its representers, and to support
 # json requires multi_json as a dependency:
 gem "multi_json"
+# Virtus provides type coercion for Reform forms.
+gem "virtus"
 
 # Data validation dsl:
 # NOTE: Hard-coded to an older version, as Roar does not seem to be

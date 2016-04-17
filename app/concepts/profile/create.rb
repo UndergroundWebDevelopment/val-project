@@ -4,12 +4,18 @@ module ValProject
       include Representer
 
       contract do
+        include Reform::Form::Coercion
+        include Reform::Form::Dry::Validations
         property :first_name
         property :last_name
         property :public_description
-        property :date_of_birth
+        property :date_of_birth, type: DateTime
+        property :public_date_of_birth, type: Axiom::Types::Boolean
         property :tagline
-        include Reform::Form::Dry::Validations
+
+        validation :default do
+          key(:first_name, &:filled?)
+        end
       end
 
       representer do
